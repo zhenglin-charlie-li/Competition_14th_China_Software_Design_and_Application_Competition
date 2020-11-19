@@ -1,0 +1,30 @@
+<!-- <button class='pop_btn' bindtap="getLocation" >获取Local</button> -->
+<view>
+     <view>
+        <view class="weui-search-bar">
+            <view class="weui-search-bar__form">
+            <!-- 输入框 -->
+                <view class="weui-search-bar__box">
+                    <icon class="weui-icon-search_in-box" type="search" size="14"></icon>
+                    <input type="number" class="weui-search-bar__input" placeholder="请输取件码" maxlength="7" bindinput="codeInput"/>
+                </view>
+            </view>
+            <!-- 确定按钮,调用搜索查询方法 -->
+            <view class="weui-search-bar__cancel-btn" bindtap='functiona'>确定</view>
+        </view>
+    </view>
+</view>
+<view class="lengthandminuts">距离{{length}}米，需要{{time}}分钟</view>
+<map
+      id="myMap"
+      style="width: 100%; height:1500rpx;"
+      latitude="{{latitude}}"
+      longitude="{{longitude}}"
+      markers="{{markers}}"
+      show-location
+      enable-zoom="{{true}}"
+      enable-scroll="{{true}}"
+      enable-rotate="{{true}}"
+      show-location="{{true}}"
+      rotate="280"
+    ></map>

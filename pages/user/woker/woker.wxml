@@ -1,0 +1,19 @@
+<!--pages/user/woker/woker.wxml-->
+<!-- <text>pages/user/woker/woker.wxml</text> -->
+<!--height 2500 正好-->
+
+<view wx:for="{{array}}">
+  <view id='number'>
+    <view class="content1">
+      <view class="content-id">{{index+1}}.</view>
+      <view class="content-title">{{item.code}}</view>
+      <view class="content-task">{{item.taskType}}</view>
+    </view>
+    <view class="content-des">距离: {{item.distance}}米</view>
+
+    <view class="dateandbtn">
+      <view class="content-date">预计到达: {{item.expectTimeString}}</view>
+    </view>
+
+  </view>
+</view>

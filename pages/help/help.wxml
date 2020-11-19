@@ -1,0 +1,167 @@
+<!--index.wxml-->
+<view class="swiper-tab">
+  <view class="swiper-tab-list {{currentTab==0 ? 'on' : ''}}" data-current="0" bindtap="swichNav">校园互助</view>
+  <view class="swiper-tab-list {{currentTab==1 ? 'on' : ''}}" data-current="1" bindtap="swichNav">已接单</view>
+  <view class="swiper-tab-list {{currentTab==2 ? 'on' : ''}}" data-current="2" bindtap="swichNav">发布任务</view>
+</view>
+
+<swiper current="{{currentTab}}" class="swiper-box" duration="300" style="height:{{array.length*240+700}}px" bindchange="bindChange">
+  <!--height 2500 正好-->
+  <!-- 我是哈哈 11111111111111111111111111111111111111111111111111111-->
+  <swiper-item>
+
+    <view>
+      <view>
+        <!-- <view class="weui-search-bar"> -->
+          <!-- <view class="weui-search-bar__form"> -->
+            <!-- 搜索框 -->
+            <!-- <view class="weui-search-bar__box">
+              <icon class="weui-icon-search_in-box" type="search" size="14"></icon>
+              <input type="text" class="weui-search-bar__input" placeholder="请输入搜索内容,如单号，用户名等" />
+            </view> -->
+          <!-- </view> -->
+          <!-- 搜索按钮,调用搜索查询方法 -->
+          <!-- <view class="weui-search-bar__cancel-btn" bindtap='search'>搜索</view> -->
+        <!-- </view> -->
+      </view>
+    </view>
+    <!-- <view>这是时间最新的任务列表</view> -->
+
+
+
+    <view wx:for="{{array}}">
+      <view id='number'>
+        <view class="content1">
+          <view class="content-id">{{index+1}}.</view>
+          <view class="content-title">{{item.title}}</view>
+          <view class="content-task">{{item.taskType}}</view>
+        </view>
+        <view class="content-des">{{item.description}}</view>
+
+        <view class="dateandbtn">
+          <view class="content-date">{{item.endDate}} {{item.endTime}}截止</view>
+          <view class="btn1" hover-class="btn-hover" bindtap="setOrdered" data-id="{{item._id}}">${{item.money}}接单</view>
+        </view>
+
+      </view>
+    </view>
+
+    <text style="display:flex;align-items:center;justify-content:center">我是有底线的……</text>
+
+  </swiper-item>
+  <!-- 我是呵呵 22222222222222222222222222222222222222222222222222222-->
+  <swiper-item>
+
+    <view>
+      <view>
+        <!-- <view class="weui-search-bar">
+          <view class="weui-search-bar__form">
+            <!-- 搜索框 -->
+            <!-- <view class="weui-search-bar__box">
+              <icon class="weui-icon-search_in-box" type="search" size="14"></icon>
+              <input type="text" class="weui-search-bar__input" placeholder="请输入搜索内容,如单号，用户名等" />
+            </view>
+          </view> -->
+          <!-- 搜索按钮,调用搜索查询方法 -->
+          <!-- <view class="weui-search-bar__cancel-btn" bindtap='search'>搜索</view> -->
+        <!-- </view> -->
+        
+        
+        
+        <view wx:for="{{orderedArray}}">
+          <view id='number'>
+            <view class="content1">
+              <view class="content-id">{{index+1}}.</view>
+              <view class="content-title">{{item.title}}</view>
+              <view class="content-task">{{item.taskType}}</view>
+            </view>
+            <view class="content-des">{{item.description}}</view>
+            <view class="dateandbtn">
+              <view class="content-date">{{item.endDate}} {{item.endTime}}截止</view>
+              <view class="btn1" hover-class="btn-hover" bindtap="setComing" data-id="{{item._id}}">我来了</view>
+            </view>
+          </view>
+        </view>
+
+      </view>
+    </view>
+    <!-- <view>这是回报最高的任务列表</view> -->
+  </swiper-item>
+
+
+
+  <!-- 我是嘿嘿 333333333333333333333333333333333333333333333333333333-->
+  <swiper-item>
+    <i-panel>
+      <i-input value="{{ title }}" bind:change="bindInputTitle" title="任务标题" type="text" placeholder="请输入任务标题" class="OneLine" />
+
+      <view class="line"></view>
+
+      <i-input value="{{ money }}" bind:change="bindInputMoney" type="number" title="酬劳" placeholder="请输入酬劳价钱" class="OneLine" />
+      <i-panel>
+        <view style='display:flex;padding:7px 15px;'>
+          <text style="color:#495060;min-width:65px;padding-right:10px;font-size:14px;" class="OneLine">开始日期</text>
+          <picker style="width:100%;" mode="date" value="{{startDate}}" bindchange="setStartDate">
+            <view style="color:#495060;font-size:14px;">
+              {{startDate}}
+            </view>
+          </picker>
+        </view>
+      </i-panel>
+      <i-panel>
+        <view style='display:flex;padding:7px 15px;' class="OneLine">
+          <text style="color:#495060;min-width:65px;padding-right:10px;font-size:14px;" class="OneLine">开始时间</text>
+          <picker style="width:100%;" mode="time" value="{{startTime}}" bindchange="setStartTime">
+            <view style="color:#495060;font-size:14px;">
+              {{startTime}}
+            </view>
+          </picker>
+        </view>
+      </i-panel>
+      <i-panel>
+        <view style='display:flex;padding:7px 15px;'>
+          <text style="color:#495060;min-width:65px;padding-right:10px;font-size:14px;" class="OneLine">结束日期</text>
+          <picker style="width:100%;" mode="date" value="{{endDate}}" bindchange="setEndDate">
+            <view style="color:#495060;font-size:14px;">
+              {{endDate}}
+            </view>
+          </picker>
+        </view>
+      </i-panel>
+      <i-panel>
+        <view style='display:flex;padding:7px 15px;'>
+          <text style="color:#495060;min-width:65px;padding-right:10px;font-size:14px;" class="OneLine">结束时间</text>
+          <picker style="width:100%;" mode="time" value="{{endTime}}" bindchange="setEndTime">
+            <view style="color:#495060;font-size:14px;">
+              {{endTime}}
+            </view>
+          </picker>
+        </view>
+      </i-panel>
+      <i-panel>
+        <view style='display:flex;padding:7px 15px;'>
+          <text style="color:#495060;min-width:65px;padding-right:10px;font-size:14px;" class="OneLine">任务类型</text>
+          <picker style="width:100%;" mode="selector" range="{{taskTypes}}" value="0" bindchange="setTaskType">
+            <view style="color:#495060;font-size:14px;">
+              {{taskType}}
+            </view>
+          </picker>
+        </view>
+      </i-panel>
+      <i-input value="{{ description }}" bind:change='bindInputDescription' style="height:200px;" type="textarea" title="详细描述"
+        placeholder="请输入详细描述(最多50字)" maxlength="50" class="OneLine" />
+
+      <view style="display:inline-block" wx:for="{{imgs}}" wx:key="item">
+
+      </view>
+      <view style="padding:20px;">
+        <!-- <i-button type="success" bind:click="handleSubmit" size="small" long="true" shape="circle">发布任务</i-button> -->
+      </view>
+      <view class='bg-m ra-10 pa-40 text-center' style="width:60%;margin:0 auto;" bindtap="handleSubmit">
+        <view class='fo-w fo-30 text-center ma-t10'>发布任务</view>
+      </view>
+
+    </i-panel>
+
+  </swiper-item>
+</swiper>
